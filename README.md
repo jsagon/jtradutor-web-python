@@ -1,2 +1,1 @@
-# jtradutor-web-python
-Tradutor online
+# jTradutor Online
