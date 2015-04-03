@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+		<title>jTradutor</title>
+		{% load staticfiles %}
+		<link rel="shortcut icon" href="{% static "img/imgJ.gif" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}" />
+		<script type="text/javascript" src="{% static "js/jquery-2.1.3.min.js" %}"></script>
+	    <meta name="viewport" content="width=device-width">
+	</head>
+	<style>
+		body{padding-top:59px}
+		hr {
+		  margin-top: 5px;
+		  margin-bottom: 0px;
+		}
+	</style>
+<body >
+	<div class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a href="#jsagon" class="menu_link navbar-brand">JSagon - Tradutor</a>	<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar-main">
+			  <ul class="nav navbar-nav">
+				<li><a href="http://www.jsagon.com/projeto/sobre/jtradutor-python">Sobre</a></li>
+			  </ul>
+			  <ul class="nav navbar-nav navbar-right">
+				<li><a href="http://www.jsagon.com">Jhonatan S. Gonçalves</a></li>
+			  </ul>
+			</div>
+		</div>
+	</div>	
+	<div class="container">
+		<div>
+			<div>
+				<h3>Tradutor</h3>
+				<p>
+					Escolha para qual idioma será traduzido e em seguida entre com a palavra desejada.
+				</p>
+			</div>
+
+			<form action="javascript: return false;" onsubmit="javascript: TranslateController.translate(this)">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="form-group">
+							<select name="language" id="language" class="form-control">
+								<option value="pt_eng">Português - Inglês</option>
+								<option value="eng_pt">Inglês - Português</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-9">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" name="word" id="word" class="form-control" placeholder="Palavra a ser traduzida" />
+								<span class="input-group-btn">
+							        <button class="btn btn-default" type="submit">Do it!</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			
+			<div>
+				<div class="row translate_div">
+					
+				</div>
+			</div>
+			
+			<script>
+				var TranslateController = function(){};
+				TranslateController.prototype = function(){
+
+					translate = function(form){
+						var word = $("#word").val();
+
+						if(word == '')
+							return false;
+
+						var form = $(form);
+						var data = form.serialize();
+						
+						$.ajax({
+							url : "/translate",
+							dataType : "JSON",
+							type : "GET",
+							data : data,
+							beforeSend : function (){
+								$(".translate_div").html('<div class="col-sm-12"><img src="{% static "img/loading_animation.gif" %}" /></div>');
+							},
+							success : function (data){
+								if(data.length > 0){
+									var html = "";
+									for (key in data){
+										html += '<div class="col-sm-12">'+
+													'<div><h4>'+data[key].word+'</h4></div>'+
+													'<div>'+data[key].translate+'</div>'+
+												'<hr></div>';
+									}
+
+									$(".translate_div").html(html);
+								}
+								else{
+									$(".translate_div").html('<div class="col-sm-12">'+
+													'<div>Não foi possível encontrar uma tradução para esta palavra</div>'+
+												'<hr></div>');
+								}
+							},
+							error : function(x){
+								
+							}
+						});
+					}
+
+					return{
+						translate : translate
+					}
+				}();
+				var TranslateController = new TranslateController();
+
+			</script>
+		</div>
+	</div>
+
+</body>
+</html>
