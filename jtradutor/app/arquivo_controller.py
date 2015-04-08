@@ -47,7 +47,7 @@ class Arquivo(object) :
 			#if(nome in result[0]):
 			
 			#if nome == result:
-			if(result.startswith(nome)):
+			if result.startswith(nome) and len(linhaA) == 2 :
 				linhas.append({'word' : result, 'translate' : linhaA[1].strip()})
 				countLimit+=1
 
