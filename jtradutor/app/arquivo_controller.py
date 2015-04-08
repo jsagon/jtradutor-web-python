@@ -14,7 +14,7 @@ class Arquivo(object) :
 		self.nome_arquivo = nome_arq
 
 	def abrir_arquivo_leitura (self):
-		self.arquivo = open (self.nome_arquivo)
+		self.arquivo = open (self.nome_arquivo, encoding='utf-8')
 
 	def abrir_arquivo_escrita (self):
 		self.arquivo = open (self.nome_arquivo, "w")

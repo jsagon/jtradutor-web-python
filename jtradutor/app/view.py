@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render_to_response
-from app import programa_controller
+from jtradutor.app import programa_controller
 
 def index(request) :
     return render_to_response('layout.html')
