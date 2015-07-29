@@ -4,7 +4,7 @@ O projeto se encontra em http://jsagon.pythonanywhere.com/jtradutor/
 
 Obs: Caso não esteja funcionando, o motivo deve ser referente à alguma manutenção ou paralização do servidor :P
 
-Para mais informações acesse: http://www.jsagon.com/projeto/sobre/jtradutor
+Para mais informações acesse: http://portfolio.jsagon.com/projeto/sobre/jtradutor
 
 <h4>Imagem 1 - PT - ENG</h4>
 ![Imagem 1 - PT - ENG](https://raw.githubusercontent.com/jsagon/screenshot/master/tradutor_python_v2_1.jpg "Imagem 1 - PT - ENG")
